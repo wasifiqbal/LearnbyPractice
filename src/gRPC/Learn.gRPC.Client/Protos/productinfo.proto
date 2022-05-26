@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "Learn.gRPC";
+
+package productinfo;
+
+service ProductInfo{
+	rpc GetProduct(ProductRequest) returns (ProductResponse);
+	rpc GetProductList(ProductListRequest) returns (stream ProductResponse);
+	rpc UploadProduct(stream ProductUploadRequest) returns (ProductUploadResponse);
+	rpc SyncProduct(stream ProductUploadRequest) returns (stream ProductUploadResponse);
+}
+
+message ProductRequest{
+	int32 Id = 1;
+}
+
+message ProductResponse{
+	int32 Id = 1;
+	string Name =2;
+	string Description = 3;
+	double PricePerUnit = 4;
+}
+
+message ProductListRequest{
+	int32 Count = 1;
+}
+
+message ProductUploadRequest{
+	string Name =1;
+	string Description = 2;
+	double PricePerUnit = 3;
+}
+message ProductUploadResponse{
+	int32 Count = 1;
+	double TotalAmount = 2;
+}
