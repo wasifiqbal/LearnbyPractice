@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.gRPC.Client", "src\gR
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{37B397D4-B0A7-4CEB-8740-E1EBAAF43126}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.BlazorServerApp", "src\Blazor\Learn.BlazorServerApp\Learn.BlazorServerApp.csproj", "{70991A72-6E4F-4150-B87A-D46C826992F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.BlazorServerApp", "src\Blazor\Learn.BlazorServerApp\Learn.BlazorServerApp.csproj", "{70991A72-6E4F-4150-B87A-D46C826992F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

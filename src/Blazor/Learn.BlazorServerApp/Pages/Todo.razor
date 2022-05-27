@@ -1,0 +1,43 @@
+﻿@page "/todo"
+
+<h3>Todo</h3>
+<PageTitle>Todo</PageTitle>
+
+@using Learn.BlazorServerApp.Models
+@using Learn.BlazorServerApp.Services
+@inject ToDoService TodoServ
+
+@if(TodoItems == null || TodoItems.Count == 0)
+{
+    <p>No Todo Items</p>
+}
+else
+{
+     <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in TodoItems)
+            {
+                <tr>
+                    <td>@items.CreatedDate.ToShortDateString()</td>
+                    <td>@items.Title</td>
+                    <td>@items.IsCompleted</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TodoItem> TodoItems;
+    protected async override Task OnInitializedAsync()
+    {
+        TodoItems = await TodoServ.GetList();
+    }
+}
