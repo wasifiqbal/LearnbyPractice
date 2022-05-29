@@ -1,6 +1,18 @@
 # Learn by Practice
-Repository to track learning path for all the latest tools and technology.
+This repository tracks my learning and practicing the latest tools and technology.
 
-## gRPC [DOCS](https://docs.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-6.0)
+## Tools / Languages
+* VS Stuido 2022
+* .NET 6
+* C#
+* Docker
+
+## Learning gRPC 
 * gRPC Server 
 * gRPC Client
+### Reference
+[Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-6.0)
+
+
+## Learning Blazor 
+* Blazor Server App
