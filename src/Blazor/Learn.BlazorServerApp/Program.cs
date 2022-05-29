@@ -1,4 +1,7 @@
-using Learn.BlazorServerApp.Services;
+using Learn.BlazorServerApp.Data;
+using Learn.BlazorServerApp.Models;
+using Learn.BlazorServerApp.Services.Todo;
+using Learn.BlazorServerApp.Services.Todo.Dto;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -8,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<ToDoService>();
-
+builder.Services.AddTransient<IDA, DA>();
+builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

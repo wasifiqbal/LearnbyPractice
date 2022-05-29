@@ -3,7 +3,9 @@
 <PageTitle>Add Todo</PageTitle>
 
 @using Learn.BlazorServerApp.Models
-@using Learn.BlazorServerApp.Services
+@using Learn.BlazorServerApp.Services.Todo.Dto
+@using Learn.BlazorServerApp.Services.Todo
+@using AutoMapper;
 @inject ToDoService TodoServ
 @inject NavigationManager Navigation
 <EditForm Model="@todoItemModel" OnValidSubmit="@SaveTodoItem">
@@ -33,18 +35,20 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-    private TodoItem todoItemModel = new();
-    protected override Task OnInitializedAsync()
+    private UpdateTodoDto todoItemModel = new();
+    protected override async Task OnInitializedAsync()
     {
-        todoItemModel = TodoServ.Get(Id);
-        if (todoItemModel.ScheduledDate == DateTime.MinValue) todoItemModel.ScheduledDate = DateTime.Today; 
-        return base.OnInitializedAsync();
+        var getModel = await TodoServ.Get(Id);
+        var config = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<TodoItem, UpdateTodoDto>());
+        todoItemModel = new Mapper(config).Map<UpdateTodoDto>(getModel);
+        await base.OnInitializedAsync();
     }
     private void SaveTodoItem()
     {
         todoItemModel.ModifiedDate = DateTime.Now;
-        if (todoItemModel.IsCompleted)
+        if (todoItemModel.IsCompleted == true)
             todoItemModel.CompletedDate = DateTime.Now;
+        TodoServ.Update(todoItemModel);
         Navigation.NavigateTo("/todo");
     }
     private void Goback()

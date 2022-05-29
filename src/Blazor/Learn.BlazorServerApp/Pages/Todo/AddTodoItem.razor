@@ -4,6 +4,8 @@
 
 @using Learn.BlazorServerApp.Models
 @using Learn.BlazorServerApp.Services
+@using Learn.BlazorServerApp.Services.Todo
+@using Learn.BlazorServerApp.Services.Todo.Dto
 @inject ToDoService TodoServ
 @inject NavigationManager Navigation
 <EditForm Model="@todoItemModel" OnValidSubmit="@SaveTodoItem">
@@ -15,11 +17,17 @@
             <InputText @bind-Value="todoItemModel.Title" DisplayName="Title"></InputText>
         </div>
     </p>
+    <p>
+        <label>Schedule Date</label>
+        <div>
+            <InputDate @bind-Value="todoItemModel.ScheduledDate" DisplayName="Schedule Date"></InputDate>
+        </div>
+    </p>
     <button type="submit">Submit</button>
     <button type="button" @onclick="@Goback">Back</button>
 </EditForm>
 @code {
-    private TodoItem todoItemModel = new();
+    private CreateTodoDto todoItemModel = new();
 
     private void SaveTodoItem()
     {

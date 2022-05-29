@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Learn.BlazorServerApp.Models
+namespace Learn.BlazorServerApp.Services.Todo.Dto
 {
-    public class TodoItem
+    public class CreateTodoDto
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
+        [StringLength(50, ErrorMessage ="Title is not valid")]
         public string Title { get; set; } = String.Empty;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Required]
-        public DateTime? ScheduledDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public DateTime? CompletedDate { get; set; }
-        
+        public DateTime? ScheduledDate { get; set; } = DateTime.Today;
         public bool IsCompleted { get; set; } = false;
     }
 }

@@ -2,14 +2,14 @@
 
 <h3>Todo</h3>
 <PageTitle>Todo</PageTitle>
-
+@using Learn.BlazorServerApp.Helpers
 @using Learn.BlazorServerApp.Models
-@using Learn.BlazorServerApp.Services
+@using Learn.BlazorServerApp.Services.Todo
 @inject ToDoService TodoServ
 
 @if (TodoItems == null || TodoItems.Count == 0)
 {
-    <p>No Todo Items <a href="/Add">Click Here to Add</a></p>
+    <p>No Todo Items <a href="/todo/add">Click Here to Add</a></p>
 }
 else
 {
@@ -18,7 +18,7 @@ else
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Status</th>
+                <th>Completed?</th>
                 <th>Completed Date</th>
                 <th>Scheduled Date</th>
                 <th>Created Date</th>
@@ -31,11 +31,11 @@ else
             {
                 <tr>
                     <td>@items.Title</td>
-                    <td>@items.IsCompleted</td>
-                    <td>@ShowDate(@items.CompletedDate)</td>
-                    <td>@ShowDate(@items.ScheduledDate)</td>
-                    <td>@ShowDateTime(@items.CreatedDate)</td>
-                    <td>@ShowDateTime(@items.ModifiedDate)</td>
+                    <td>@FormatHelper.FormatBoolean(items.IsCompleted)</td>
+                    <td>@FormatHelper.FormatDate(@items.CompletedDate, "MM/dd/yyyy")</td>
+                    <td>@FormatHelper.FormatDate(@items.ScheduledDate, "MM/dd/yyyy")</td>
+                    <td>@FormatHelper.FormatDate(@items.CreatedDate,"MM/dd/yyyy hh:mm tt")</td>
+                    <td>@FormatHelper.FormatDate(@items.ModifiedDate,"MM/dd/yyyy hh:mm tt")</td>
                     <td>
                         <button @onclick="() => Delete(items.Id)">Delete</button>
                         <a class="button" href="/todo/edit/@items.Id">Edit</a>
@@ -57,19 +57,6 @@ else
     {
         TodoServ.Delete(id);
         TodoItems = await TodoServ.GetList();
-    }
-    
-    private string ShowDate(DateTime date)
-    {
-        if (date == DateTime.MinValue)
-            return "";
-        return date.ToString("MM/dd/yyyy");
-    }
-    private string ShowDateTime(DateTime date)
-    {
-        if (date == DateTime.MinValue)
-            return "";
-        return date.ToString("MM/dd/yyyy hh:mm tt");
     }
 
 }
