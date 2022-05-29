@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.gRPC", ".\src\gRPC\Learn.gRPC\Learn.gRPC.csproj", "{B6853CCC-0EA1-4E8B-A7EC-08A24B3A30E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.gRPC", "src\gRPC\Learn.gRPC\Learn.gRPC.csproj", "{B6853CCC-0EA1-4E8B-A7EC-08A24B3A30E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gRPC", "gRPC", "{88D2767A-9D91-4AF1-A28F-134F1F792647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.gRPC.Client", ".\src\gRPC\Learn.gRPC.Client\Learn.gRPC.Client.csproj", "{25203A78-C0AF-419C-BB2C-087A54A8A80B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.gRPC.Client", "src\gRPC\Learn.gRPC.Client\Learn.gRPC.Client.csproj", "{25203A78-C0AF-419C-BB2C-087A54A8A80B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{37B397D4-B0A7-4CEB-8740-E1EBAAF43126}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.BlazorServerApp", "src\Blazor\Learn.BlazorServerApp\Learn.BlazorServerApp.csproj", "{70991A72-6E4F-4150-B87A-D46C826992F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6AF86342-5776-451A-8643-D5AE2B2C8FC6}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +32,10 @@ Global
 		{25203A78-C0AF-419C-BB2C-087A54A8A80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25203A78-C0AF-419C-BB2C-087A54A8A80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25203A78-C0AF-419C-BB2C-087A54A8A80B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70991A72-6E4F-4150-B87A-D46C826992F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70991A72-6E4F-4150-B87A-D46C826992F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70991A72-6E4F-4150-B87A-D46C826992F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70991A72-6E4F-4150-B87A-D46C826992F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B6853CCC-0EA1-4E8B-A7EC-08A24B3A30E1} = {88D2767A-9D91-4AF1-A28F-134F1F792647}
 		{25203A78-C0AF-419C-BB2C-087A54A8A80B} = {88D2767A-9D91-4AF1-A28F-134F1F792647}
+		{70991A72-6E4F-4150-B87A-D46C826992F8} = {37B397D4-B0A7-4CEB-8740-E1EBAAF43126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CD3A29F2-95A4-4379-94C6-680039738169}

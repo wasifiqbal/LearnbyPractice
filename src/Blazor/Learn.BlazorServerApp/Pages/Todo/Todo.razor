@@ -1,0 +1,62 @@
+﻿@page "/todo"
+
+<h3>Todo</h3>
+<PageTitle>Todo</PageTitle>
+@using Learn.BlazorServerApp.Helpers
+@using Learn.BlazorServerApp.Models
+@using Learn.BlazorServerApp.Services.Todo
+@inject ToDoService TodoServ
+
+@if (TodoItems == null || TodoItems.Count == 0)
+{
+    <p>No Todo Items <a href="/todo/add">Click Here to Add</a></p>
+}
+else
+{
+    <a href="/todo/add">Click Here to Add</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Completed?</th>
+                <th>Completed Date</th>
+                <th>Scheduled Date</th>
+                <th>Created Date</th>
+                <th>Modified Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in TodoItems)
+            {
+                <tr>
+                    <td>@items.Title</td>
+                    <td>@FormatHelper.FormatBoolean(items.IsCompleted)</td>
+                    <td>@FormatHelper.FormatDate(@items.CompletedDate, "MM/dd/yyyy")</td>
+                    <td>@FormatHelper.FormatDate(@items.ScheduledDate, "MM/dd/yyyy")</td>
+                    <td>@FormatHelper.FormatDate(@items.CreatedDate,"MM/dd/yyyy hh:mm tt")</td>
+                    <td>@FormatHelper.FormatDate(@items.ModifiedDate,"MM/dd/yyyy hh:mm tt")</td>
+                    <td>
+                        <button @onclick="() => Delete(items.Id)">Delete</button>
+                        <a class="button" href="/todo/edit/@items.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TodoItem> TodoItems;
+    protected async override Task OnInitializedAsync()
+    {
+        TodoItems = await TodoServ.GetList();
+    }
+
+    private async void Delete(int id)
+    {
+        TodoServ.Delete(id);
+        TodoItems.RemoveAll(x => x.Id == id);
+    }
+
+}

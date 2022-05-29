@@ -1,0 +1,58 @@
+﻿@page "/todo/edit/{Id:int}"
+<h3>TodoItem</h3>
+<PageTitle>Add Todo</PageTitle>
+
+@using Learn.BlazorServerApp.Models
+@using Learn.BlazorServerApp.Services.Todo.Dto
+@using Learn.BlazorServerApp.Services.Todo
+@using AutoMapper;
+@inject ToDoService TodoServ
+@inject NavigationManager Navigation
+<EditForm Model="@todoItemModel" OnValidSubmit="@SaveTodoItem">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <p>
+        <label>Title</label>
+        <div>
+            <InputText @bind-Value="todoItemModel.Title" DisplayName="Title"></InputText>
+        </div>
+    </p>
+    <p>
+        <label>Schedule Date</label>
+        <div>
+            <InputDate @bind-Value="todoItemModel.ScheduledDate" DisplayName="Schedule Date"></InputDate>
+        </div>
+    </p>
+    <p>
+        <label>Is Completed</label>
+        <div>
+            <InputCheckbox @bind-Value="todoItemModel.IsCompleted" DisplayName="Is Completed"></InputCheckbox>
+        </div>
+    </p>
+    <button type="submit">Submit</button>
+    <button type="button" @onclick="@Goback">Back</button>
+</EditForm>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private UpdateTodoDto todoItemModel = new();
+    protected override async Task OnInitializedAsync()
+    {
+        var getModel = await TodoServ.Get(Id);
+        var config = new AutoMapper.MapperConfiguration(cfg => cfg.CreateMap<TodoItem, UpdateTodoDto>());
+        todoItemModel = new Mapper(config).Map<UpdateTodoDto>(getModel);
+        await base.OnInitializedAsync();
+    }
+    private void SaveTodoItem()
+    {
+        todoItemModel.ModifiedDate = DateTime.Now;
+        if (todoItemModel.IsCompleted == true)
+            todoItemModel.CompletedDate = DateTime.Now;
+        TodoServ.Update(todoItemModel);
+        Navigation.NavigateTo("/todo");
+    }
+    private void Goback()
+    {
+        Navigation.NavigateTo("/todo");
+    }
+}
