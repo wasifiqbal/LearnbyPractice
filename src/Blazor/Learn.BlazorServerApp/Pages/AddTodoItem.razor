@@ -1,0 +1,33 @@
+﻿@page "/todo/add"
+<h3>TodoItem</h3>
+<PageTitle>Add Todo</PageTitle>
+
+@using Learn.BlazorServerApp.Models
+@using Learn.BlazorServerApp.Services
+@inject ToDoService TodoServ
+@inject NavigationManager Navigation
+<EditForm Model="@todoItemModel" OnValidSubmit="@SaveTodoItem">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <p>
+        <label>Title</label>
+        <div>
+            <InputText @bind-Value="todoItemModel.Title" DisplayName="Title"></InputText>
+        </div>
+    </p>
+    <button type="submit">Submit</button>
+    <button type="button" @onclick="@Goback">Back</button>
+</EditForm>
+@code {
+    private TodoItem todoItemModel = new();
+
+    private void SaveTodoItem()
+    {
+        TodoServ.Add(todoItemModel);
+        Navigation.NavigateTo("/todo");
+    }
+    private void Goback()
+    {
+        Navigation.NavigateTo("/todo");
+    }
+}
