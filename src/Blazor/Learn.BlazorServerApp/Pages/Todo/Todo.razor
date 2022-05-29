@@ -56,7 +56,7 @@ else
     private async void Delete(int id)
     {
         TodoServ.Delete(id);
-        TodoItems = await TodoServ.GetList();
+        TodoItems.RemoveAll(x => x.Id == id);
     }
 
 }
